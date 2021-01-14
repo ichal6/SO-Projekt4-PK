@@ -78,8 +78,7 @@ int main()
 
 void createQueue(){
     queueID = msgget(key, IPC_CREAT|IPC_EXCL|0600);
-    if(-1 == queueID)
-    {
+    if(queueID == -1) {
         perror("Blad utworzenia kolejki komunikatow!");
         exit(-1);
     }
@@ -88,7 +87,7 @@ void createQueue(){
 
 void createKey(){
     key = ftok(".", 'A');
-    if(key == -1){
+    if(key == -1) {
         perror("Blad utworzenia klucza!");
         exit(-1);
     }
@@ -99,13 +98,12 @@ void signalHandler()
     removeMessageQueue(queueID);
     
     printf("\n KONIEC PRACY SERWERA!! \n");
-    exit(0);
+    exit(EXIT_SUCCESS);
 }
 
 void removeMessageQueue(int queueID)
 {
-    if(-1 == msgctl(queueID, IPC_RMID, 0))
-    {
+    if(msgctl(queueID, IPC_RMID, 0 == -1)) {
         perror("Blad usuwania kolejki komunikatow!");
         exit(-2);
     }
@@ -118,7 +116,7 @@ char *toUpperCase(char *messageForUpper, size_t sizeText)
 {
     char *messageAfterUpper = messageForUpper;
     
-    while(*messageForUpper && --sizeText>0){
+    while(*messageForUpper && --sizeText>0) {
         *messageAfterUpper++ = toupper(*messageForUpper++);
     }
     
