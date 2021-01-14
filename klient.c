@@ -83,7 +83,7 @@ void getAccessToQueue(){
         perror("Blad podlaczenia do kolejki komunikatow!\nSprawdz czy serwer pracuje!");
         exit(-1);
     }
-    printf("Podlaczonos ie do kolejki! \n");
+    printf("Podlaczono sie do kolejki! \n");
 }
 
 void createKey(){
@@ -110,9 +110,9 @@ void *nadawca()
     msgctl(queueID, IPC_STAT, &buffer);
     int max = buffer.msg_qbytes/ (sizeof(StrukturaWiadomosci)-sizeof(long int));
     max--; // space for response from server
-    
+
+    printf("Podaj wiadomosc: \n");
     while(1){
-        printf("Podaj wiadomosc: \n");
         fgets(msg.wiadomosc, MAX_LENGTH_MESSAGE, stdin);
         
         msg.odbiorca = SERVER;
@@ -169,7 +169,7 @@ void *odbiorca()
         && errno == EINTR);
         
         if(status == -1){
-            perror("Blad odbioru wiadomosci!");
+            perror("Server is unactivated!");
             exit(EXIT_FAILURE);
         }
         
