@@ -9,7 +9,7 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include "pthread.h"
-#define MAX_LENGTH_MESSAGE 25
+#define MAX_LENGTH_MESSAGE 40
 #define SERVER 1
 #define CLIENT 2
 

@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#define MAX_LENGTH_MESSAGE 25
+#define MAX_LENGTH_MESSAGE 40
 #define SERVER 1
 #define CLIENT 2
 
@@ -97,7 +97,7 @@ void signalHandler()
 {
     removeMessageQueue(queueID);
     
-    printf("\n KONIEC PRACY SERWERA!! \n");
+    printf("\nKONIEC PRACY SERWERA!!\n");
     exit(EXIT_SUCCESS);
 }
 
